@@ -17,9 +17,9 @@
             <v-col cols="6" sm="3" v-for="(stat, index) in statsData" :key="index">
               <div
                 class="stat-circle"
-                :class="{ 
-                  'cursor-pointer': stat.count > 0 || stat.label === 'Progresso', 
-                  'disabled-stat': stat.count === 0 && stat.label !== 'Progresso' 
+                :class="{
+                  'cursor-pointer': stat.count > 0 || stat.label === 'Progresso',
+                  'disabled-stat': stat.count === 0 && stat.label !== 'Progresso',
                 }"
                 @click="navigateToTodos(stat.filter)"
               >

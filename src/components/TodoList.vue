@@ -451,7 +451,7 @@ export default {
   .todo-item {
     padding: 0;
   }
-  
+
   .todo-item .v-row {
     padding: 16px;
   }
