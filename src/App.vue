@@ -58,8 +58,8 @@
       ></v-app-bar-nav-icon>
 
       <v-toolbar-title class="d-flex align-center">
-        <v-icon left size="28" color="white" class="me-3">mdi-check-circle</v-icon>
-        <span class="text-h5 font-weight-bold text-white">Todo App</span>
+        <v-icon left size="28" color="white" class="me-3 app-icon">mdi-check-circle</v-icon>
+        <span class="text-h5 font-weight-bold text-white app-title">Todo App</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -236,25 +236,51 @@ export default {
   font-family: "Inter", "Roboto", sans-serif;
 }
 
-/* Sidebar Gradient */
+/* Sidebar - Purple Gradient to Match App Bar */
 .sidebar-gradient {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(118, 75, 162, 0.15);
   height: 100vh !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 /* Sidebar Header */
 .sidebar-header {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Gradient Avatar */
 .gradient-avatar {
-  background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Navigation Items */
@@ -289,41 +315,66 @@ export default {
 }
 
 .close-btn {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  border-radius: 8px;
 }
 
 .close-btn:hover {
   background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* App Bar Gradient - Forçar preto em ambos os temas */
+/* App Bar - Beautiful Purple Gradient Design */
 .app-bar-gradient {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%) !important;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(118, 75, 162, 0.15),
+    0 2px 8px rgba(139, 92, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Garantir que a v-app-bar seja sempre preta */
+.app-bar-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Garantir que a v-app-bar seja sempre roxa */
 .v-app-bar.app-bar-gradient {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%) !important;
 }
 
 /* Forçar no tema claro também */
 .v-theme--light .v-app-bar.app-bar-gradient {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%) !important;
 }
 
 .nav-icon {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .nav-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05) translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .theme-btn {
@@ -378,6 +429,54 @@ export default {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* App Bar Title Styling */
+.v-toolbar-title {
+  position: relative;
+  z-index: 2;
+}
+
+.v-toolbar-title .v-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  animation: iconGlow 3s ease-in-out infinite alternate;
+}
+
+.app-icon {
+  transition: all 0.3s ease;
+}
+
+.app-icon:hover {
+  transform: rotate(360deg) scale(1.1);
+}
+
+.v-toolbar-title span {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", "Roboto", sans-serif;
+  letter-spacing: 0.5px;
+  background: linear-gradient(45deg, #ffffff 0%, #f8fafc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  position: relative;
+}
+
+.app-title {
+  transition: all 0.3s ease;
+}
+
+.app-title:hover {
+  transform: translateY(-1px);
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes iconGlow {
+  0% {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+  }
+  100% {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .nav-item {
@@ -395,6 +494,18 @@ export default {
   .v-navigation-drawer {
     max-width: 280px !important;
   }
+
+  .v-app-bar {
+    height: 64px !important;
+  }
+
+  .v-toolbar-title span {
+    font-size: 1.1rem;
+  }
+
+  .v-toolbar-title .v-icon {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -408,6 +519,18 @@ export default {
 
   .nav-item {
     margin: 1px 6px;
+  }
+
+  .v-app-bar {
+    height: 56px !important;
+  }
+
+  .v-toolbar-title span {
+    font-size: 1rem;
+  }
+
+  .v-toolbar-title .v-icon {
+    font-size: 20px;
   }
 }
 
@@ -427,5 +550,10 @@ export default {
 
 .v-navigation-drawer ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhanced ripple effect */
+.v-app-bar .v-btn--icon:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 </style>

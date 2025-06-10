@@ -89,17 +89,17 @@
                     {{ todo.text }}
                   </div>
                   <div class="d-flex align-center gap-2 mt-1">
-                    <v-chip 
-                      :color="getCategoryColor(todo.category)" 
-                      size="x-small" 
+                    <v-chip
+                      :color="getCategoryColor(todo.category)"
+                      size="x-small"
                       variant="tonal"
                       :prepend-icon="getCategoryIcon(todo.category)"
                     >
                       {{ getCategoryLabel(todo.category) }}
                     </v-chip>
-                    <v-chip 
-                      :color="getPriorityColor(todo.priority)" 
-                      size="x-small" 
+                    <v-chip
+                      :color="getPriorityColor(todo.priority)"
+                      size="x-small"
                       variant="tonal"
                       :prepend-icon="getPriorityIcon(todo.priority)"
                     >
@@ -531,7 +531,7 @@ export default {
     height: 16px;
     border-radius: 8px;
   }
-  
+
   .recent-todo-item .gap-2 {
     gap: 4px;
     flex-wrap: wrap;
