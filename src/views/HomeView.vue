@@ -89,7 +89,20 @@
                     {{ todo.text }}
                   </div>
                   <div class="d-flex align-center gap-2 mt-1">
-                    <v-chip :color="getPriorityColor(todo.priority)" size="x-small" variant="tonal">
+                    <v-chip 
+                      :color="getCategoryColor(todo.category)" 
+                      size="x-small" 
+                      variant="tonal"
+                      :prepend-icon="getCategoryIcon(todo.category)"
+                    >
+                      {{ getCategoryLabel(todo.category) }}
+                    </v-chip>
+                    <v-chip 
+                      :color="getPriorityColor(todo.priority)" 
+                      size="x-small" 
+                      variant="tonal"
+                      :prepend-icon="getPriorityIcon(todo.priority)"
+                    >
                       {{ getPriorityLabel(todo.priority) }}
                     </v-chip>
                     <span class="text-caption text-medium-emphasis">
@@ -232,6 +245,56 @@ export default {
         high: "Alta",
       };
       return labels[priority] || priority;
+    },
+
+    getPriorityIcon(priority) {
+      const icons = {
+        // Portuguese values (new)
+        baixa: "mdi-arrow-down",
+        media: "mdi-equal",
+        alta: "mdi-arrow-up",
+        // English values (legacy fallback)
+        low: "mdi-arrow-down",
+        medium: "mdi-equal",
+        high: "mdi-arrow-up",
+      };
+      return icons[priority] || "mdi-flag";
+    },
+
+    getCategoryColor(category) {
+      const colors = {
+        geral: "blue",
+        trabalho: "indigo",
+        pessoal: "pink",
+        estudos: "purple",
+        casa: "green",
+        saude: "red",
+      };
+      return colors[category] || "grey";
+    },
+
+    getCategoryIcon(category) {
+      const icons = {
+        geral: "mdi-circle",
+        trabalho: "mdi-briefcase",
+        pessoal: "mdi-account",
+        estudos: "mdi-school",
+        casa: "mdi-home",
+        saude: "mdi-heart",
+      };
+      return icons[category] || "mdi-tag";
+    },
+
+    getCategoryLabel(category) {
+      const labels = {
+        geral: "Geral",
+        trabalho: "Trabalho",
+        pessoal: "Pessoal",
+        estudos: "Estudos",
+        casa: "Casa",
+        saude: "Saúde",
+      };
+      return labels[category] || category;
     },
 
     navigateToTodos(filter) {
@@ -450,6 +513,31 @@ export default {
   gap: 8px;
 }
 
+/* Recent Todos List - Chips Styling */
+.recent-todo-item .v-chip {
+  font-size: 0.7rem;
+  height: 18px;
+  border-radius: 9px;
+}
+
+.recent-todo-item .gap-2 {
+  gap: 6px;
+}
+
+/* Mobile adjustments for chips */
+@media (max-width: 600px) {
+  .recent-todo-item .v-chip {
+    font-size: 0.65rem;
+    height: 16px;
+    border-radius: 8px;
+  }
+  
+  .recent-todo-item .gap-2 {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}
+
 /* Empty State */
 .empty-state {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
@@ -636,7 +724,7 @@ export default {
   }
 }
 
-/* Clean Header Design - No Dark Background */
+/* Clean Header Design */
 
 /* Clean Statistics Design */
 
