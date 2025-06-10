@@ -50,16 +50,32 @@
     </v-navigation-drawer>
 
     <!-- App Bar -->
-    <v-app-bar elevation="0" height="70" class="app-bar-gradient">
-      <v-app-bar-nav-icon
-        @click="handleMenuClick"
-        class="nav-icon"
-        color="white"
-      ></v-app-bar-nav-icon>
+    <v-app-bar
+      elevation="0"
+      :height="$vuetify.display.mobile ? 64 : 70"
+      class="app-bar-gradient"
+      density="comfortable"
+    >
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon
+          @click="handleMenuClick"
+          class="nav-icon"
+          color="white"
+        ></v-app-bar-nav-icon>
+      </template>
 
-      <v-toolbar-title class="d-flex align-center">
-        <v-icon left size="28" color="white" class="me-3 app-icon">mdi-check-circle</v-icon>
-        <span class="text-h5 font-weight-bold text-white app-title">Todo App</span>
+      <v-toolbar-title class="toolbar-title-container">
+        <div class="title-content">
+          <v-icon :size="$vuetify.display.mobile ? 24 : 28" color="white" class="app-icon">
+            mdi-check-circle
+          </v-icon>
+          <span
+            class="font-weight-bold text-white app-title"
+            :class="$vuetify.display.mobile ? 'text-h6' : 'text-h5'"
+          >
+            Todo App
+          </span>
+        </div>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -336,6 +352,45 @@ export default {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  min-height: 64px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Altura específica para mobile */
+@media (max-width: 960px) {
+  .app-bar-gradient {
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 0 8px !important;
+  }
+
+  .toolbar-title-container {
+    padding: 8px 0;
+  }
+
+  .nav-icon {
+    margin: 8px;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .app-title {
+    font-size: 1.25rem !important;
+    line-height: 1.2;
+  }
+
+  .title-content {
+    gap: 4px !important;
+  }
+}
+
+/* Altura para desktop */
+@media (min-width: 961px) {
+  .app-bar-gradient {
+    height: 70px !important;
+    min-height: 70px !important;
+  }
 }
 
 .app-bar-gradient::before {
@@ -354,11 +409,32 @@ export default {
 /* Garantir que a v-app-bar seja sempre roxa */
 .v-app-bar.app-bar-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%) !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 /* Forçar no tema claro também */
 .v-theme--light .v-app-bar.app-bar-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8b5cf6 100%) !important;
+}
+
+/* Alinhamento específico do conteúdo do app bar */
+.app-bar-gradient .v-toolbar__content {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.app-bar-gradient .v-toolbar-title {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.app-bar-gradient .v-app-bar-nav-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .nav-icon {
@@ -368,6 +444,9 @@ export default {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .nav-icon:hover {
@@ -430,36 +509,41 @@ export default {
 }
 
 /* App Bar Title Styling */
-.v-toolbar-title {
-  position: relative;
-  z-index: 2;
+.toolbar-title-container {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.v-toolbar-title .v-icon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  animation: iconGlow 3s ease-in-out infinite alternate;
+.title-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 100% !important;
+  margin-left: 8px !important;
 }
 
 .app-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   transition: all 0.3s ease;
+  margin: 0 !important;
 }
 
 .app-icon:hover {
   transform: rotate(360deg) scale(1.1);
 }
 
-.v-toolbar-title span {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
-  font-family: "Inter", "Roboto", sans-serif;
-  letter-spacing: 0.5px;
-  background: linear-gradient(45deg, #ffffff 0%, #f8fafc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  position: relative;
-}
-
 .app-title {
+  display: flex !important;
+  align-items: center !important;
   transition: all 0.3s ease;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .app-title:hover {
@@ -519,10 +603,6 @@ export default {
 
   .nav-item {
     margin: 1px 6px;
-  }
-
-  .v-app-bar {
-    height: 56px !important;
   }
 
   .v-toolbar-title span {
